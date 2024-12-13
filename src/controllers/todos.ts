@@ -48,3 +48,24 @@ export const updateTodo = (req: Request, res:Response, next: NextFunction) => {
         console.log(error)
     }
 }
+
+export const deleteTodo = (req: Request, res:Response, next: NextFunction) => {
+    try {
+       const todoId = req.params.id
+       const updatedTask = (req.body as {task: string}).task
+       const todoIndex = todos.findIndex(todo => todo.id === todoId)
+
+       if (todoIndex < 0) {
+        throw new Error('Coul not find todo with such id')
+       }
+
+       todos.splice(todoIndex, 1)
+
+       res.status(201).json({
+        message: 'Task is deleted!',
+        updatedTask: updatedTask
+    })
+    } catch (error) {
+        console.log(error)
+    }
+}
