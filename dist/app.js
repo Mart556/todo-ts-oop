@@ -6,6 +6,10 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
 const app = (0, express_1.default)();
 const todos_1 = __importDefault(require("./routes/todos"));
+app.use(express_1.default.json());
+app.use(express_1.default.urlencoded({
+    extended: true
+}));
 app.use('/todos', todos_1.default);
 app.use((error, req, res, next) => {
     res.json({ message: error.message });

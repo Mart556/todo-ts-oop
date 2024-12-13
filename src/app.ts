@@ -4,6 +4,11 @@ const app = express()
 
 import todoRoutes from './routes/todos'
 
+app.use(express.json());
+app.use(express.urlencoded({
+  extended: true
+}));
+
 app.use('/todos', todoRoutes)
 
 app.use((error: Error, req: Request, res: Response, next: NextFunction) => {
